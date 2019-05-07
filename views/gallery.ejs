@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Shutter &mdash; Colorlib Website Template</title>
+    <title>BlockGeeks</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -48,7 +48,7 @@
     <div class="main-menu">
       <ul class="js-clone-nav">
         <li class="active"><a href="gallery.html">Home</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="#">BlockChain Hackers</a></li>
       </ul>
     </div>
   </header> 
@@ -56,32 +56,17 @@
     <div class="container-fluid photos">
       <div class="row align-items-stretch">
         
-        <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-          <a href="/galleryAssets/images/img_1.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="/galleryAssets/images/img_1.jpg" alt="Image" class="img-fluid">
+        <% for(var i = 0 ; i < picIds.length ; i++) { %>
+       <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <a href="<%= sourceFolder+picIds[i] %>" class="d-block photo-item" data-fancybox="gallery">
+            <img src="<%= sourceFolder+picIds[i] %>" alt="Image" class="img-fluid">
             <div class="photo-text-more">
               <span class="icon icon-search"></span>
             </div>
           </a>
         </div>
-        <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-          <a href="/galleryAssets/images/img_2.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="/galleryAssets/images/img_2.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
-        <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-          <a href="/galleryAssets/images/img_3.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="/galleryAssets/images/img_3.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
-
-
+        <% } %>
+        
         
 
       </div>
