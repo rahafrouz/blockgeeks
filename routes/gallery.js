@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET gallery. */
 router.get('/', function(req, res, next) {
-  res.sendFile(path.join(__dirname + '/gallery.html'));
+  res.send("hello world");
 });
 
 module.exports = router;
