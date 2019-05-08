@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/galleryAssets/css/fancybox.min.css">
 
     <link rel="stylesheet" href="/galleryAssets/css/style.css">
-    
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
   </head>
   <body>
   
@@ -40,7 +40,7 @@
 
   <header class="header-bar d-flex d-lg-block align-items-center" data-aos="fade-left">
     <div class="site-logo">
-      <a href="index.html">Shutter</a>
+      <a href="index.html">BlockGeeks</a>
     </div>
     
     <div class="d-inline-block d-xl-none ml-md-0 ml-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
@@ -49,26 +49,19 @@
       <ul class="js-clone-nav">
         <li class="active"><a href="gallery.html">Home</a></li>
         <li><a href="#">BlockChain Hackers</a></li>
+        <hr>
+        <hr>
+        <li>
+          <input type="text" id="imageToSearch" class="form-control" placeholder="Type image name">
+        </li>
+        <hr>
+        <li><input type="submit" value="Search" class="btn btn-primary btn-md text-white" onclick="searchImage()" ></li>
       </ul>
     </div>
   </header> 
   <main class="main-content">
     <div class="container-fluid photos">
-      <div class="row align-items-stretch">
-        
-        <% for(var i = 0 ; i < picIds.length ; i++) { %>
-       <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-          <a href="<%= sourceFolder+picIds[i] %>" class="d-block photo-item" data-fancybox="gallery">
-            <img src="<%= sourceFolder+picIds[i] %>" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
-        <% } %>
-        
-        
-
+      <div class="row align-items-stretch" id="galleryImages">
       </div>
 
       <div class="row justify-content-center">
@@ -84,7 +77,30 @@
   </main>
 
 </div> <!-- .site-wrap -->
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var picIds = ["img_10.jpg", "img_4.jpg"]; 
+      var sourceFolder = "/publishedImages/";
+      
+      for(i=0; i<picIds.length; i++) {
+        var imgId =  "img" + i;
+        var divImgId = "div"+ i;
+        var imgDiv = $('<div class="col-6 col-md-6 col-lg-4" data-aos=fade-up data-aos-delay=200>').attr('id', divImgId);
+         var imgLink = $('<a href='+sourceFolder+picIds[i]+' class="d-block photo-item" data-fancybox=gallery>').attr('id', imgId);
+        var imgSrcElement = $('<img src='+sourceFolder+picIds[i]+' alt=Image class=img-fluid>');
 
+        imgDiv.appendTo('#galleryImages');
+        imgLink.appendTo('#' + divImgId);
+        imgSrcElement.appendTo('#' + imgId);
+            
+      }
+    });
+    function searchImage(sourceFolder, picIds){
+      var imgId = document.getElementById("imageToSearch").value;
+
+    console.log("src: "+ sourceFolder+ " " + "picsids: "+ picIds + " "+ "imgtosearch"+imgId); 
+  }
+  </script>
   <script src="/galleryAssets/js/jquery-3.3.1.min.js"></script>
   <script src="/galleryAssets/js/jquery-migrate-3.0.1.min.js"></script>
   <script src="/galleryAssets/js/jquery-ui.js"></script>
