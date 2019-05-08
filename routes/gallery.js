@@ -57,13 +57,11 @@ router.post('/', urlencodedParser, function(req, res, next) {
                         publishedImages.push(item.blurredUrl);
                 });
             } else {
-                console.log("hide this picture " + param);
+                console.log("hide this picture " + params);
                 // hide the picture
                 // do nothing, just dont load into published
             }
         }
-        // for unconsented -> load the blurred/hidden version
-
     }
 
     // option: 1-blurred, 2-hidden

@@ -32,3 +32,6 @@ a {
 .consented-image{
 	padding:5px!important;
 }
+.form-control {
+	margin-bottom: 5px;
+}
