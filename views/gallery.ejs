@@ -51,15 +51,18 @@
         <li><a href="#">BlockChain Hackers</a></li>
         <hr>
         <hr>
+         
         <li>
-          <input type="text" id="imageToSearch" class="form-control" placeholder="Type image name">
+         
         </li>
         <hr>
-        <li><input type="submit" value="Search" class="btn btn-primary btn-md text-white" onclick="searchImage()" ></li>
+        <li></li>
       </ul>
     </div>
   </header> 
   <main class="main-content">
+    <input type="text" id="imageToSearch" class="form-control" >
+    <input type="submit" value="Search" class="btn btn-primary btn-md text-white" onclick="searchImage()">
     <div class="container-fluid photos">
       <div class="row align-items-stretch" id="galleryImages">
       </div>
@@ -78,27 +81,42 @@
 
 </div> <!-- .site-wrap -->
   <script type="text/javascript">
-    $(document).ready(function() {
-      var picIds = ["img_10.jpg", "img_4.jpg"]; 
+      var picsList = ["img_10.jpg", "img_4.jpg"]; 
+      var searchPicsList = ["img_10.jpg", "img_4.jpg"];
       var sourceFolder = "/publishedImages/";
-      
-      for(i=0; i<picIds.length; i++) {
+    $(document).ready(function() { 
+      for(i=0; i<picsList.length; i++) {
         var imgId =  "img" + i;
         var divImgId = "div"+ i;
         var imgDiv = $('<div class="col-6 col-md-6 col-lg-4" data-aos=fade-up data-aos-delay=200>').attr('id', divImgId);
-         var imgLink = $('<a href='+sourceFolder+picIds[i]+' class="d-block photo-item" data-fancybox=gallery>').attr('id', imgId);
-        var imgSrcElement = $('<img src='+sourceFolder+picIds[i]+' alt=Image class=img-fluid>');
-
+         var imgLink = $('<a href='+sourceFolder+picsList[i]+' class="d-block photo-item" data-fancybox=gallery>').attr('id', imgId);
+        var imgSrcElement = $('<img src='+sourceFolder+picsList[i]+' alt=Image class=img-fluid>');
         imgDiv.appendTo('#galleryImages');
         imgLink.appendTo('#' + divImgId);
-        imgSrcElement.appendTo('#' + imgId);
-            
+        imgSrcElement.appendTo('#' + imgId);     
       }
     });
-    function searchImage(sourceFolder, picIds){
-      var imgId = document.getElementById("imageToSearch").value;
 
-    console.log("src: "+ sourceFolder+ " " + "picsids: "+ picIds + " "+ "imgtosearch"+imgId); 
+    function searchImage(){
+      var picsToSearch = document.getElementById("imageToSearch").value;
+      var divToClean = document.getElementById("galleryImages");
+      while (divToClean.firstChild) {
+          divToClean.removeChild(divToClean.firstChild);
+      }
+      for(i=0; i< searchPicsList.length; i++) {
+        if(searchPicsList[i].includes(picsToSearch)){
+          console.log("yes");
+            var imgId =  "img" + i;
+            var divImgId = "div"+ i;
+            var imgDiv = $('<div class="col-6 col-md-6 col-lg-4" data-aos=fade-up data-aos-delay=200>').attr('id', divImgId);
+             var imgLink = $('<a href='+sourceFolder+searchPicsList[i]+' class="d-block photo-item" data-fancybox=gallery>').attr('id', imgId);
+            var imgSrcElement = $('<img src='+sourceFolder+searchPicsList[i]+' alt=Image class=img-fluid>');
+            imgDiv.appendTo('#galleryImages');
+            imgLink.appendTo('#' + divImgId);
+            imgSrcElement.appendTo('#' + imgId);     
+          
+        }
+      }
   }
   </script>
   <script src="/galleryAssets/js/jquery-3.3.1.min.js"></script>
