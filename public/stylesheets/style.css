@@ -22,3 +22,13 @@ a {
 .col-md-4.no-padding {padding: 0;}
 .right {float: right;}
 .no-padding .custom-select { margin-right: 4px; }
+
+.consented-image img{
+	border: solid 3px green;
+    border-radius: 9px;
+    padding: 0;
+    /*margin: 10px;*/
+}
+.consented-image{
+	padding:5px!important;
+}
