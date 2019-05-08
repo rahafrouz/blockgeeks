@@ -19,7 +19,7 @@
                 <div class="grid" data-masonry='{ "itemSelector": ".grid-item" }'>
                     <% uploadedImgs.forEach((img) => { %>
                     <div class="grid-item">
-                        <img src="<%= '/images/' + img %>" alt="Image">
+                        <img src="<%= '/uploaded/' + img %>" alt="Image">
                     </div>
                     <% }) %>
                 </div>
@@ -35,15 +35,16 @@
                     </div>
                     <% }) %>
                 </div>
-                <div class="row">
+                <form class="row" method="post" action="/gallery">
                     <div class="col-md-12">
                         unconsented img
                     </div>
                     <% unconsentedImgs.forEach((img) => { %>
                     <div class="col-md-4 no-padding">
-                        <img src="<%= img.current_url %>" alt="Image" class="img-fluid">
+                        <img src="<%= img.current_url %>" alt="Image" class="img-fluid" id="<%=img.id%>">
+                        <input type="hidden" name="<%=img.id%>" value="<%= img.unconsentedUsers %>">
                         <div class="input-group mb-3">
-                            <select class="custom-select" id="inputGroupSelect02">
+                            <select class="custom-select" name="<%=img.id %>">
                                 <option selected>Choose publishing method...</option>
                                 <option value="1" selected>Blurred</option>
                                 <option value="2">Hidden</option>
@@ -51,11 +52,11 @@
                         </div>
                     </div>
                     <% }) %>
-                </div>
+                    <div class="right">
+                        <button type="submit" class="btn btn-info">Next</button>
+                    </div>
+                </form>
             </div>
-        </div>
-        <div class="row right">
-        	<button type="button" class="btn btn-info">Next</button>
         </div>
     </div>
     <script>

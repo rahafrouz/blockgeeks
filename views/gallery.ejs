@@ -1,139 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <title>BlockGeeks</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
     <link rel="stylesheet" href="fonts/icomoon/style.css">
-
     <link rel="stylesheet" href="/galleryAssets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/galleryAssets/css/magnific-popup.css">
     <link rel="stylesheet" href="/galleryAssets/css/jquery-ui.css">
     <link rel="stylesheet" href="/galleryAssets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/galleryAssets/css/owl.theme.default.min.css">
-
     <link rel="stylesheet" href="/galleryAssets/css/bootstrap-datepicker.css">
-
     <link rel="stylesheet" href="/galleryAssets/fonts/flaticon/font/flaticon.css">
-
     <link rel="stylesheet" href="/galleryAssets/css/aos.css">
     <link rel="stylesheet" href="/galleryAssets/css/fancybox.min.css">
-
     <link rel="stylesheet" href="/galleryAssets/css/style.css">
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-  </head>
-  <body>
-  
+</head>
 
-  <div class="site-wrap">
-
-  <div class="site-mobile-menu">
-    <div class="site-mobile-menu-header">
-      <div class="site-mobile-menu-close mt-3">
-        <span class="icon-close2 js-menu-toggle"></span>
-      </div>
-    </div>
-    <div class="site-mobile-menu-body"></div>
-  </div>
-
-  <header class="header-bar d-flex d-lg-block align-items-center" data-aos="fade-left">
-    <div class="site-logo">
-      <a href="index.html">BlockGeeks</a>
-    </div>
-    
-    <div class="d-inline-block d-xl-none ml-md-0 ml-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
-
-    <div class="main-menu">
-      <ul class="js-clone-nav">
-        <li class="active"><a href="gallery.html">Home</a></li>
-        <li><a href="#">BlockChain Hackers</a></li>
-        <hr>
-        <hr>
-         
-        <li>
-         
-        </li>
-        <hr>
-        <li></li>
-      </ul>
-    </div>
-  </header> 
-  <main class="main-content">
-    <input type="text" id="imageToSearch" class="form-control" >
-    <input type="submit" value="Search" class="btn btn-primary btn-md text-white" onclick="searchImage()">
-    <div class="container-fluid photos">
-      <div class="row align-items-stretch" id="galleryImages">
-      </div>
-
-      <div class="row justify-content-center">
-        <div class="col-md-12 text-center py-5">
-          <p>
-        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-      </p>
+<body>
+    <div class="site-wrap">
+        <div class="site-mobile-menu">
+            <div class="site-mobile-menu-header">
+                <div class="site-mobile-menu-close mt-3">
+                    <span class="icon-close2 js-menu-toggle"></span>
+                </div>
+            </div>
+            <div class="site-mobile-menu-body"></div>
         </div>
-      </div>
-    </div>
-  </main>
+        <!--  <header class="header-bar d-flex d-lg-block align-items-center" data-aos="fade-left">
+            <div class="site-logo">
+                <a href="index.html">BlockGeeks</a>
+            </div>
+            <div class="d-inline-block d-xl-none ml-md-0 ml-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
+            <div class="main-menu">
+                <ul class="js-clone-nav">
+                    <li class="active"><a href="gallery.html">Home</a></li>
+                    <li><a href="#">BlockChain Hackers</a></li>
+                    <hr>
+                    <hr>
+                    <li>
+                    </li>
+                    <hr>
+                    <li></li>
+                </ul>
+            </div>
+        </header> -->
+        <main class="main-content">
+            <input type="text" id="imageToSearch" class="form-control">
+            <input type="submit" value="Search" class="btn btn-primary btn-md text-white" onclick="searchImage()">
+            <div class="container-fluid photos">
+                <div class="row align-items-stretch" id="galleryImages">
+                    <% publishedImages.forEach((img) => { %>
+                    <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                        <img src="<%= img %>" alt="Image" class="img-fluid">
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+        </main>
+    </div> <!-- .site-wrap -->
+    <script src="/galleryAssets/js/jquery-3.3.1.min.js"></script>
+    <script src="/galleryAssets/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="/galleryAssets/js/jquery-ui.js"></script>
+    <script src="/galleryAssets/js/popper.min.js"></script>
+    <script src="/galleryAssets/js/bootstrap.min.js"></script>
+    <script src="/galleryAssets/js/owl.carousel.min.js"></script>
+    <script src="/galleryAssets/js/jquery.stellar.min.js"></script>
+    <script src="/galleryAssets/js/jquery.countdown.min.js"></script>
+    <script src="/galleryAssets/js/jquery.magnific-popup.min.js"></script>
+    <script src="/galleryAssets/js/bootstrap-datepicker.min.js"></script>
+    <script src="/galleryAssets/js/aos.js"></script>
+    <script src="/galleryAssets/js/jquery.fancybox.min.js"></script>
+    <script src="/galleryAssets/js/main.js"></script>
+</body>
 
-</div> <!-- .site-wrap -->
-  <script type="text/javascript">
-      var picsList = ["img_10.jpg", "img_4.jpg"]; 
-      var searchPicsList = ["img_10.jpg", "img_4.jpg"];
-      var sourceFolder = "/publishedImages/";
-    $(document).ready(function() { 
-      for(i=0; i<picsList.length; i++) {
-        var imgId =  "img" + i;
-        var divImgId = "div"+ i;
-        var imgDiv = $('<div class="col-6 col-md-6 col-lg-4" data-aos=fade-up data-aos-delay=200>').attr('id', divImgId);
-         var imgLink = $('<a href='+sourceFolder+picsList[i]+' class="d-block photo-item" data-fancybox=gallery>').attr('id', imgId);
-        var imgSrcElement = $('<img src='+sourceFolder+picsList[i]+' alt=Image class=img-fluid>');
-        imgDiv.appendTo('#galleryImages');
-        imgLink.appendTo('#' + divImgId);
-        imgSrcElement.appendTo('#' + imgId);     
-      }
-    });
-
-    function searchImage(){
-      var picsToSearch = document.getElementById("imageToSearch").value;
-      var divToClean = document.getElementById("galleryImages");
-      while (divToClean.firstChild) {
-          divToClean.removeChild(divToClean.firstChild);
-      }
-      for(i=0; i< searchPicsList.length; i++) {
-        if(searchPicsList[i].includes(picsToSearch)){
-          console.log("yes");
-            var imgId =  "img" + i;
-            var divImgId = "div"+ i;
-            var imgDiv = $('<div class="col-6 col-md-6 col-lg-4" data-aos=fade-up data-aos-delay=200>').attr('id', divImgId);
-             var imgLink = $('<a href='+sourceFolder+searchPicsList[i]+' class="d-block photo-item" data-fancybox=gallery>').attr('id', imgId);
-            var imgSrcElement = $('<img src='+sourceFolder+searchPicsList[i]+' alt=Image class=img-fluid>');
-            imgDiv.appendTo('#galleryImages');
-            imgLink.appendTo('#' + divImgId);
-            imgSrcElement.appendTo('#' + imgId);     
-          
-        }
-      }
-  }
-  </script>
-  <script src="/galleryAssets/js/jquery-3.3.1.min.js"></script>
-  <script src="/galleryAssets/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="/galleryAssets/js/jquery-ui.js"></script>
-  <script src="/galleryAssets/js/popper.min.js"></script>
-  <script src="/galleryAssets/js/bootstrap.min.js"></script>
-  <script src="/galleryAssets/js/owl.carousel.min.js"></script>
-  <script src="/galleryAssets/js/jquery.stellar.min.js"></script>
-  <script src="/galleryAssets/js/jquery.countdown.min.js"></script>
-  <script src="/galleryAssets/js/jquery.magnific-popup.min.js"></script>
-  <script src="/galleryAssets/js/bootstrap-datepicker.min.js"></script>
-  <script src="/galleryAssets/js/aos.js"></script>
-
-  <script src="/galleryAssets/js/jquery.fancybox.min.js"></script>
-
-  <script src="/galleryAssets/js/main.js"></script>
-    
-  </body>
 </html>

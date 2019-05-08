@@ -9,63 +9,71 @@ var fs = require('fs');
 const MongoClient = require('mongodb').MongoClient;
 const client = new MongoClient(process.env.DATABASE_URL, { useNewUrlParser: true });
 
-const mockData = [
-    {
+// Store a list of all validated published images.
+
+
+const mockData = [{
+        id: '1',
         title: "An's",
         users: [
             { name: "AnP", uid: "5cd1806c80ddb40001767cea" },
         ],
         hidden: false,
         default_action: "blurred",
-        original_url: '/images/1.jpg',
-        current_url: '/images/1.jpg',
+        original_url: '/uploaded/1.jpg',
+        current_url: '/uploaded/1.jpg',
         processed: true,
     },
     {
+        id: '2',
         title: "Fully consented pictures",
         users: [
             { name: "FlorS", uid: "5cd158b080ddb40001767cce" },
         ],
         hidden: true,
         default_action: "blurred",
-        original_url: '/images/2.jpg',
-        current_url: '/images/2.jpg',
+        original_url: '/uploaded/2.jpg',
+        current_url: '/uploaded/2.jpg',
         processed: true,
     },
     {
+        id: '3',
         title: "Fully consented pictures",
         users: [
             { name: "Munrat", uid: "5cd28a4b80ddb40001767d80" }
         ],
         hidden: true,
         default_action: "blurred",
-        original_url: '/images/3.jpg',
-        current_url: '/images/3.jpg',
+        original_url: '/uploaded/3.jpg',
+        current_url: '/uploaded/3.jpg',
         processed: true,
     },
     {
+        id: '4',
         title: "Fully consented pictures",
         users: [
             { name: "MeruY", uid: "5cd2896180ddb40001767d7b" },
         ],
         hidden: true,
         default_action: "blurred",
-        original_url: '/images/4.jpg',
-        current_url: '/images/4.jpg',
+        original_url: '/uploaded/4.jpg',
+        current_url: '/uploaded/4.jpg',
         processed: true,
     },
     {
+        id: '5',
         title: "Fully consented pictures",
         users: [
             { name: "Amir Rah", uid: "5cd288ba80ddb40001767d76" },
         ],
         hidden: true,
         default_action: "blurred",
-        original_url: '/images/5.jpg',
-        current_url: '/images/5.jpg',
+        original_url: '/uploaded/5.jpg',
+        current_url: '/uploaded/5.jpg',
         processed: true,
     },
     {
+        id: '6',
         title: "Fully consented pictures",
         users: [
             { name: "Amir Rah", uid: "5cd288ba80ddb40001767d76" },
@@ -74,11 +82,12 @@ const mockData = [
         ],
         hidden: true,
         default_action: "blurred",
-        original_url: '/images/6.jpg',
-        current_url: '/images/6.jpg',
+        original_url: '/uploaded/6.jpg',
+        current_url: '/uploaded/6.jpg',
         processed: true,
     },
     {
+        id: '7',
         title: "Fully consented pictures",
         users: [
             { name: "Amir Rah", uid: "5cd288ba80ddb40001767d76" },
@@ -89,8 +98,8 @@ const mockData = [
         ],
         hidden: false,
         default_action: "blurred",
-        original_url: '/images/7.jpg',
-        current_url: '/images/7.jpg',
+        original_url: '/uploaded/7.jpg',
+        current_url: '/uploaded/7.jpg',
         processed: true,
     },
     // {
@@ -110,9 +119,35 @@ const mockData = [
     // },
 ];
 
-function callback(images, res, blurred) {
-    let consentedImgs = [];
-    let unconsentedImgs = [];
+// var pictMapping = {
+//     "5cd288ba80ddb40001767d76": [ //amir
+//         { imgId: '5', blurredUrl: '5-blurred-amir.jpg' },
+//         { imgId: '6', blurredUrl: '6-blurred-amir.jpg' },
+//         { imgId: '7', blurredUrl: '7-blurred-amir.jpg' },
+//     ],
+//     "5cd1806c80ddb40001767cea": [ //an
+//         { imgId: '1', blurredUrl: '1-blurred-an.jpg' },
+//         { imgId: '7', blurredUrl: '7-blurred-an.jpg' },
+//     ],
+//     "5cd2896180ddb40001767d7b": [ //meru
+//         { imgId: '4', blurredUrl: '4-blurred-meru.jpg' },
+//         { imgId: '7', blurredUrl: '7-blurred-meru.jpg' },
+//     ],
+//     "5cd158b080ddb40001767cce": [ //flor
+//         { imgId: '2', blurredUrl: '2-blurred-florian.jpg' },
+//         { imgId: '7', blurredUrl: '7-blurred-florian.jpg' },
+//         { imgId: '6', blurredUrl: '6-blurred-florian.jpg' },
+//     ],
+//     "5cd28a4b80ddb40001767d80": [ //munrat
+//         { imgId: '3', blurredUrl: '3-blurred-munrat.jpg' },
+//         { imgId: '6', blurredUrl: '6-blurred-munrat.jpg' },
+//     ],
+
+// }
+
+function callback(images, req, res, blurred) {
+    // let consentedImgs = [];
+    // let unconsentedImgs = [];
 
     const headers = {
         'Accept': 'application/json',
@@ -127,30 +162,33 @@ function callback(images, res, blurred) {
             return res.json();
         }).then(function(body) {
             let consentedIds = body.Users.map(function(user) { return user.ID });
-            // let consentedIds_set = new Set(consentedIds); // console.log(body.Users);
+            let consentedIds_set = new Set(consentedIds); // console.log(body.Users);
 
             // look for fully consented img in list of images
             images.forEach(function(item) {
                 let includeUsrs = item.users.map(function(i) { return i.uid; });
                 // let intersection = new Set(includeUsrs.filter(x => consentedIds_set.has(x)));
 
-                console.log("users of image:", includeUsrs);
-                console.log("all consents", consentedIds);
-                // console.log("intersection:", intersection);
+                // console.log("users of image:", includeUsrs);
+                // console.log("all consents", consentedIds);
+
+                let unconsentedUsers = includeUsrs.filter(x => !consentedIds_set.has(x));
+                // console.log("difference:", unconsentedUsers);
+                item.unconsentedUsers = unconsentedUsers;
 
                 if (includeUsrs.every(u => consentedIds.includes(u))) {
-                    consentedImgs.push(item);
+                    req.app.locals.consentedImgs.push(item);
                     // } else if (intersection) {
                     // console.log("intersection is not empty");
                 } else {
-                    unconsentedImgs.push(item);
+                    req.app.locals.unconsentedImgs.push(item);
                 }
             });
 
             let uploadedImgs = fs.readdir("./public/uploaded", function(err, items) {
                 res.render('pictures', {
-                    consentedImgs: consentedImgs,
-                    unconsentedImgs: unconsentedImgs,
+                    consentedImgs: req.app.locals.consentedImgs,
+                    unconsentedImgs: req.app.locals.unconsentedImgs,
                     uploadedImgs: items
                 });
 
@@ -160,7 +198,7 @@ function callback(images, res, blurred) {
 }
 
 router.get('/', function(req, res, next) {
-    callback(mockData, res, true);
+    callback(mockData, req, res, true);
 
     // client.connect(function(err, client) {
     //     // console.log("Connected correctly to server");
@@ -178,5 +216,6 @@ router.get('/', function(req, res, next) {
     // }); //end of dbconnect
 
 }); //end of get
+
 
 module.exports = router;

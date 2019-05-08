@@ -21,3 +21,4 @@ a {
 
 .col-md-4.no-padding {padding: 0;}
 .right {float: right;}
+.no-padding .custom-select { margin-right: 4px; }

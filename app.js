@@ -10,6 +10,8 @@ var picsRouter = require('./routes/pictures');
 var galleryRouter = require('./routes/gallery');
 
 var app = express();
+app.locals.consentedImgs = [];
+app.locals.unconsentedImgs = [];
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
