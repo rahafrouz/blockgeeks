@@ -32,6 +32,15 @@ a {
 .consented-image{
 	padding:5px!important;
 }
+
+.normal-image img{
+	padding:0;
+	    border-radius: 9px;
+
+}
+.normal-image{
+	padding:5px!important;
+}
 .form-control {
 	margin-bottom: 5px;
 }
