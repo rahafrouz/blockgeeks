@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>New activities</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                1 of 2
+                <h1>First column here</h1>
+            </div>
+            <div class="col">
+                2 of 2
+                <h1>2nd column here</h1>
+                <div class="row">
+                    <p>consented img</p>
+                    <% consentedImgs.forEach((img) => { %>
+                    <p class="list-group-item-text">Name:
+                        <%= img.title %>
+                    </p>
+                    <p class="list-group-item-text">Orig Url:
+                        <%= img.original_url %>
+                    </p>
+                    <% }) %>
+                </div>
+                <div class="row">
+                    Unconsented img
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
