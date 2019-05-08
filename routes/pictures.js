@@ -10,7 +10,7 @@ const assert = require('assert');
 
 const client = new MongoClient(process.env.DATABASE_URL, { useNewUrlParser: true });
 
-function callback(images, res) {
+function callback(images, res,blurred) {
     let consentedImgs = [];
     let unconsentedImgs = [];
 
@@ -27,6 +27,7 @@ function callback(images, res) {
             return res.json();
         }).then(function(body) {
             let consentedIds = body.Users.map(function(user) { return user.ID });
+            let consentedIds_set = new Set(consentedIds);
             // console.log(body.Users);
             // console.log(consentedIds);
             console.log(images);
@@ -34,10 +35,19 @@ function callback(images, res) {
             // look for fully consented img in list of images
             images.forEach(function(item) {
                 let includeUsrs = item.users.map(function(i) { return i.user_id; });
-                console.log(includeUsrs);
+                let intersection = new Set( includeUsrs.filter(x => consentedIds_set.has(x)));
+
+                console.log("users of image:",includeUsrs);
+                console.log("all consents",consentedIds);
+                console.log("intersection:",intersection);
+
                 if (includeUsrs.every(u => consentedIds.includes(u))) {
                     consentedImgs.push(item);
-                } else {
+                } else if (intersection ){
+                    console.log("intersection is not empty");
+                }
+
+                else {
                     unconsentedImgs.push(item);
                 }
             });
@@ -60,11 +70,14 @@ router.get('/', function(req, res, next) {
 
         const db = client.db("testing");
         const collection = db.collection('pictures');
+        const blurred = db.collection('blurred');
+        var publishedImages = db.collection('published_images');
         // Find some documents
         collection.find({}).toArray(function(err, images) {
             assert.equal(err, null);
-            callback(images, res);
+            callback(images, res,blurred);
         });
+
     }); //end of dbconnect
 
 }); //end of get
