@@ -5,35 +5,61 @@
     <title>New activities</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="/galleryAssets/js/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 </head>
 
 <body>
     <div class="container">
         <div class="row">
             <div class="col">
-                1 of 2
-                <h1>First column here</h1>
+                <h1>Show newly uploaded picture</h1>
+                <p>Activity description</p>
+                <input type="text" name="" placeholder="You are having good time?" />
+                <div class="grid" data-masonry='{ "itemSelector": ".grid-item" }'>
+                    <% uploadedImgs.forEach((img) => { %>
+                    <div class="grid-item">
+                        <img src="<%= '/images/' + img %>" alt="Image">
+                    </div>
+                    <% }) %>
+                </div>
             </div>
             <div class="col">
                 2 of 2
                 <h1>2nd column here</h1>
                 <div class="row">
-                    <p>consented img</p>
+                    <div class="col-md-12">consented img</div>
                     <% consentedImgs.forEach((img) => { %>
-                    <p class="list-group-item-text">Name:
-                        <%= img.title %>
-                    </p>
-                    <p class="list-group-item-text">Orig Url:
-                        <%= img.original_url %>
-                    </p>
+                    <div class="col-md-4 no-padding">
+                        <img src="<%= img.current_url %>" alt="Image" class="img-fluid">
+                    </div>
                     <% }) %>
                 </div>
                 <div class="row">
-                    Unconsented img
+                    <div class="col-md-12">
+                        unconsented img
+                    </div>
+                    <% unconsentedImgs.forEach((img) => { %>
+                    <div class="col-md-4 no-padding">
+                        <img src="<%= img.current_url %>" alt="Image" class="img-fluid">
+                        <div class="input-group mb-3">
+                            <select class="custom-select" id="inputGroupSelect02">
+                                <option selected>Choose publishing method...</option>
+                                <option value="1" selected>Blurred</option>
+                                <option value="2">Hidden</option>
+                            </select>
+                        </div>
+                    </div>
+                    <% }) %>
                 </div>
             </div>
         </div>
+        <div class="row right">
+        	<button type="button" class="btn btn-info">Next</button>
+        </div>
     </div>
+    <script>
+    </script>
 </body>
 
 </html>

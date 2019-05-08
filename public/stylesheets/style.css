@@ -6,3 +6,18 @@ body {
 a {
   color: #00B7FF;
 }
+
+/* fluid 5 columns */
+.grid-sizer,
+.grid-item { width: 30%; }
+/* 2 columns wide */
+.grid-item--width2 { width: 40%; }
+.grid img { width: 100%; padding: 2px; }
+
+.img-fluid {
+	padding-bottom: 4px;
+	padding-right: 4px;
+}
+
+.col-md-4.no-padding {padding: 0;}
+.right {float: right;}
