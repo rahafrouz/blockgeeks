@@ -146,8 +146,8 @@ const mockData = [{
 // }
 
 function callback(images, req, res, blurred) {
-    // let consentedImgs = [];
-    // let unconsentedImgs = [];
+    req.app.locals.consentedImgs = [];
+    req.app.locals.unconsentedImgs = [];
 
     const headers = {
         'Accept': 'application/json',

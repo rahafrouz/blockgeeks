@@ -41,7 +41,7 @@
                     </div>
                     <% unconsentedImgs.forEach((img) => { %>
                     <div class="col-md-4 no-padding">
-                        <img src="<%= img.current_url %>" alt="Image" class="img-fluid" id="<%=img.id%>">
+                        <img src="<%= img.current_url %>" alt="Image" class="img-fluid" name="<%=img.id%>">
                         <input type="hidden" name="<%=img.id%>" value="<%= img.unconsentedUsers %>">
                         <div class="input-group mb-3">
                             <select class="custom-select" name="<%=img.id %>">
